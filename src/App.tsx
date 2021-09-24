@@ -1,13 +1,11 @@
 import React from 'react';
 import logo from './assets/logo.png';
 
-function App() {
+export default function App() {
     return (
         <div>
             <h3>Hello, world!</h3>
-            <img src={ logo } className="logo" alt="logo" />
+            <img src={logo} className="logo" alt="logo" />
         </div>
     )
 }
-
-export default App;

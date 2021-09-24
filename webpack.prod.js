@@ -20,15 +20,7 @@ module.exports = merge(common, {
                     'css-loader',
                     'sass-loader'
                 ],
-            },
-            {
-                test: /\.(png|jp(e*)g|svg|gif)$/,
-                loader: 'file-loader',
-                options: {
-                    outputPath: 'assets',
-                    name: '[contenthash].[ext]',
-                },
-            },
+            }
         ],
     },
     optimization: {
