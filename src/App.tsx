@@ -1,11 +1,18 @@
 import React from 'react';
-import logo from './assets/logo.png';
+
+import Header from './Components/Header/Header';
+import Movies from './Components/Movies/Movies';
+import Footer from './Containers/Footer';
+import LogoLink from './Components/Shared/LogoLink';
 
 export default function App() {
     return (
-        <div>
-            <h3>Hello, world!</h3>
-            <img src={logo} className="logo" alt="logo" />
-        </div>
+        <>
+            <Header />
+            <Movies />
+            <Footer>
+                <LogoLink />
+            </Footer>
+        </>
     )
 }
