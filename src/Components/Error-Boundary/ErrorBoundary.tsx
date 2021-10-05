@@ -1,13 +1,28 @@
 import React from 'react';
 import './Error-Boundary.scss';
 
-export const ErrorBoundary: React.FC<{}> = ({ children }) => {
-    // fallback UI
-    const Oops = () => (
-        <h2 className="error-msg">Oops, something went wrong...</h2>
-    );
+interface ErrorState {
+    hasError: boolean;
+}
 
-    const hasError = false;
+export class ErrorBoundary extends React.Component {
+    state: ErrorState;
 
-    return <>{hasError ? <Oops /> : children}</>
+    constructor(props: any) {
+        super(props);
+        this.state = { hasError: false };
+    }
+
+    static getDerivedStateFromError() {
+        return { hasError: true };
+    }
+
+    render() {
+        // fallback UI
+        const Oops = () => (
+            <h2 className="error-msg">Oops, something went wrong...</h2>
+        );
+
+        return this.state.hasError ? <Oops /> : this.props.children
+    }
 }

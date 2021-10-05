@@ -1,0 +1,66 @@
+@import "src/styles/colors";
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 525px 300px;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  padding-bottom: 30px;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+
+  label {
+    color: $red;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 13px;
+  }
+
+  .form-control {
+    height: 50px;
+    color: $white;
+    font-weight: 300;
+
+    &.desc {
+      height: 190px;
+      resize: none;
+    }
+  }
+
+  select.form-control {
+    text-transform: capitalize;
+
+    option {
+      line-height: 24px;
+      background: $black;
+    }
+  }
+}
+
+.form-actions {
+  margin-top: 70px;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    padding: 10px 30px;
+  }
+
+  .reset {
+    border: 1.5px solid $red;
+    color: $red;
+    background: $black;
+    margin-right: 15px;
+  }
+
+  .submit {
+    color: $white;
+    background: $red;
+  }
+}
