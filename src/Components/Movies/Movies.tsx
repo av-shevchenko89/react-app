@@ -1,12 +1,12 @@
 import React from 'react';
-import MovieActions from '../../Containers/MovieActions';
+import { MovieActions } from '../../Containers';
 import { Movie } from './movie';
 import MovieList from './MovieList';
 
-import'./Movies.scss';
+import './Movies.scss';
 
 // mock for data should be get from API
-let movies: Movie[] = [
+const movies: Movie[] = [
     {
         id: 'mov-1',
         title: 'Matrix',
@@ -44,7 +44,7 @@ let movies: Movie[] = [
     }
 ]
 
-export default function Movies() {
+export function Movies() {
     return (
         <main>
             <MovieActions />

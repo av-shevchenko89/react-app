@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Btn from '../Shared/Btn';
+import {Btn} from '../../Shared';
 
 export default function Search() {
     const [ value, setSearchVal ] = useState('');

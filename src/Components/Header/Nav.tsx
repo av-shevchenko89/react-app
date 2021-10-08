@@ -1,6 +1,5 @@
 import React from 'react';
-import LogoLink from '../Shared/LogoLink';
-import Btn from '../Shared/Btn';
+import { Btn, LogoLink } from '../../Shared';
 
 export default function Nav() {
     return (

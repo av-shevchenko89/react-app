@@ -1,11 +1,11 @@
 import React from 'react';
-import Title from '../Shared/Title';
 import Nav from './Nav';
 import Search from './Search';
+import {Title} from '../../Shared';
 
 import './Header.scss';
 
-export default function Header() {
+export function Header() {
     return (
         <header>
             <Nav />

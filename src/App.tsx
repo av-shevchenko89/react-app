@@ -1,10 +1,8 @@
 import React from 'react';
 
-import Header from './Components/Header/Header';
-import Movies from './Components/Movies/Movies';
-import Footer from './Containers/Footer';
-import LogoLink from './Components/Shared/LogoLink';
-import ErrorBoundary from './Components/Error-Boundary/ErrorBoundary';
+import { ErrorBoundary, Header, Movies } from './Components';
+import { Footer } from './Containers';
+import { LogoLink } from './Shared';
 
 export default function App() {
     return (

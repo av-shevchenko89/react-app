@@ -4,10 +4,9 @@ import Sorter from '../Components/Movies/Sorter';
 
 import './MovieActions.scss';
 
-const MovieActions = () => (
+export const MovieActions = () => (
     <div className="actions">
         <GenreToggle />
         <Sorter />
     </div>
 )
-export default MovieActions;
