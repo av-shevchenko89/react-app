@@ -1,0 +1,12 @@
+@import "../styles/colors";
+
+footer {
+  width: 100%;
+  height: 70px;
+  background: $dark_grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+}

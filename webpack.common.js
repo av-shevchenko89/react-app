@@ -2,11 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: path.join(__dirname, 'src', 'index.js'),
+    entry: path.join(__dirname, 'src', 'index.tsx'),
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
+        assetModuleFilename: 'assets/[hash][ext][query]'
     },
     optimization: {
         splitChunks: {
@@ -14,11 +15,11 @@ module.exports = {
         },
     },
     resolve: {
-        modules: ['node_modules'],
+        extensions: ['.tsx', '.ts', '.js'],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'React App',
+            title: 'Movie App',
             template: path.join(__dirname, 'src', 'index.html'),
             filename: 'index.html'
         }),
@@ -26,14 +27,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                include: path.resolve(__dirname, 'src'),
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
-                    }
-                }
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.(png|jp(e*)g|svg|gif)$/,
+                type: 'asset/resource'
             }
         ]
     }

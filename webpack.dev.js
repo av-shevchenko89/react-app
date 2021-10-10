@@ -19,15 +19,7 @@ module.exports = merge(common, {
             {
                 test: /\.s[ac]ss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
-            },
-            {
-                test: /\.(png|jp(e*)g|svg|gif)$/,
-                loader: 'file-loader',
-                options: {
-                    outputPath: 'assets',
-                    name: '[name].[ext]',
-                },
-            },
+            }
         ],
     },
 });
