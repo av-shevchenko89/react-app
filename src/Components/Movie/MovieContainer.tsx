@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Movie, MovieItem } from '../../movie';
-import {MovieForm} from './MovieForm';
+import { MovieForm } from './MovieForm';
 
 interface Props {
-    movie?: MovieItem;
+    movieItem?: MovieItem;
     onSubmit: (data: Movie) => void;
-}
-
-interface State {
-    movie: Movie;
-    isNew: boolean;
 }
 
 const emptyMovie: Movie = {
@@ -22,46 +17,36 @@ const emptyMovie: Movie = {
     desc: '',
 }
 
-export class MovieContainer extends React.Component<Props> {
-    state: State = {
-        movie: emptyMovie,
-        isNew: true
+export function MovieContainer(props: Props) {
+    const [ movie, setMovie ] = useState(emptyMovie);
+    const [ isNew, setIsNew ] = useState(true);
+    const { movieItem, onSubmit } = props;
+
+    useEffect(() => {
+        if (movieItem) {
+            const { id, imageUrl, ...data } = movieItem;
+            setMovie(data);
+            setIsNew(false);
+        }
+    }, []);
+
+    const handleChange = (key: string, value: any) => {
+        setMovie({ ...movie, [key]: value });
     };
 
-    constructor(props: Props) {
-        super(props);
+    const handleReset = () => {
+        setMovie(emptyMovie);
+    };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleReset = this.handleReset.bind(this);
-    }
-
-    componentDidMount() {
-        if (this.props.movie) {
-            const { id, imageUrl, ...data } = this.props.movie;
-            this.setState({ movie: data, isNew: false })
-        }
-    }
-
-    handleChange(key: string, value: any) {
-        const movie = { ...this.state.movie, [key]: value };
-        this.setState({ movie });
-    }
-
-    handleReset() {
-        this.setState({ movie: emptyMovie })
-    }
-
-    render() {
-        return (
-            <>
-                <h1>{this.state.isNew ? 'Add movie' : 'Edit movie'}</h1>
-                <MovieForm
-                    movie={this.state.movie}
-                    onChange={this.handleChange}
-                    onSubmit={() => this.props.onSubmit(this.state.movie)}
-                    onReset={this.handleReset}
-                />
-            </>
-        )
-    }
+    return (
+        <>
+            <h1>{isNew ? 'Add movie' : 'Edit movie'}</h1>
+            <MovieForm
+                movie={movie}
+                onChange={handleChange}
+                onSubmit={() => onSubmit(movie)}
+                onReset={handleReset}
+            />
+        </>
+    )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { MovieActions, MovieList } from '../../Containers';
 import { MovieItem } from '../../movie';
@@ -10,52 +10,29 @@ interface Props {
     onDelete: (id: string) => void;
 }
 
-interface State {
-    genre: string;
-    sortBy: string;
-}
+export function Movies(props: Props) {
+    const [ genre, setGenre ] = useState('all');
+    const [ sortBy, setSortBy ] = useState('year');
+    const [ sortedMovies, setSorted ] = useState([]);
 
-export class Movies extends React.Component<Props, State> {
-    state: State = {
-        genre: 'all',
-        sortBy: 'year',
-    };
+    const { onEdit, onDelete, movies } = props;
 
-    constructor(props: Props) {
-        super(props);
-
-        this.setGenre = this.setGenre.bind(this);
-        this.sort = this.sort.bind(this);
+    const collectMovies = () => {
+        const filteredMovies = movies.filter(movie => (genre !== 'all') ? movie.genre === genre : true);
+        return _.sortBy(filteredMovies, sortBy);
     }
 
-    setGenre(genre: string) {
-        this.setState({ genre });
-    }
+    useEffect(() => {
+        setSorted(collectMovies());
+    }, [ movies, genre, sortBy ]);
 
-    sort(sortBy: string) {
-        this.setState({ sortBy });
-    }
+    return (
+        <main>
+            <MovieActions genre={genre} setGenre={setGenre} sortBy={sortBy} sort={setSortBy} />
 
-    collectMovies() {
-        const { genre, sortBy } = this.state;
-        const movies = this.props.movies.filter(movie => (genre !== 'all') ? movie.genre === genre : true);
+            <p className="movie-num"><b>{sortedMovies.length}</b> movies found</p>
 
-        return _.orderBy(movies, sortBy, 'asc');
-    }
-
-    render() {
-        const { genre, sortBy } = this.state;
-        const { onEdit, onDelete } = this.props;
-        const sorted = this.collectMovies();
-
-        return (
-            <main>
-                <MovieActions genre={genre} setGenre={this.setGenre} sortBy={sortBy} sort={this.sort} />
-
-                <p className="movie-num"><b>{sorted.length}</b> movies found</p>
-
-                <MovieList movies={sorted} onEdit={onEdit} onDelete={onDelete} />
-            </main>
-        )
-    }
+            <MovieList movies={sortedMovies} onEdit={onEdit} onDelete={onDelete} />
+        </main>
+    )
 }

@@ -119,7 +119,7 @@ class App extends React.Component<any, State> {
                     isOpened={!!(showPopup && currentMovie)}
                     onClose={this.handleClose}
                 >
-                    <MovieContainer movie={currentMovie} onSubmit={this.handleEdit} />
+                    <MovieContainer movieItem={currentMovie} onSubmit={this.handleEdit} />
                 </PopUp>
 
                 <PopUp
