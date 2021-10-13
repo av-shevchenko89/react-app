@@ -1,6 +1,6 @@
 import React from 'react';
 import { MovieItem } from '../movie';
-import MovieMenu from '../Components/Movies/MovieMenu';
+import {MovieMenu} from '../Components';
 
 interface Props {
     movie: MovieItem;
@@ -8,7 +8,7 @@ interface Props {
     onDelete: () => void;
 }
 
-export default function MovieCard(props: Props) {
+export function MovieCard(props: Props) {
     const { movie, onEdit, onDelete } = props;
     const { title, genre, year, imageUrl } = movie;
 

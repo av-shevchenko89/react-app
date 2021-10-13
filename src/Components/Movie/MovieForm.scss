@@ -2,10 +2,10 @@
 
 .form-grid {
   display: grid;
-  grid-template-columns: 525px 300px;
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
-  padding-bottom: 30px;
+  grid-template-columns: 45vw 23vw;
+  grid-column-gap: 2vw;
+  grid-row-gap: 2vh;
+  padding-bottom: 2vh;
 }
 
 .form-group {
@@ -19,17 +19,19 @@
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 600;
-    padding-bottom: 13px;
+    padding-bottom: 1.2vh;
   }
 
   .form-control {
     height: 50px;
     color: $white;
     font-weight: 300;
+    font-size: 14px;
 
     &.desc {
-      height: 190px;
+      height: 18vh;
       resize: none;
+      padding-top: 10px;
     }
   }
 
@@ -44,19 +46,19 @@
 }
 
 .form-actions {
-  margin-top: 70px;
+  margin-top: 5vh;
   display: flex;
   justify-content: flex-end;
 
   button {
-    padding: 10px 30px;
+    padding: 1vh 2vw;
   }
 
   .reset {
     border: 1.5px solid $red;
     color: $red;
     background: $black;
-    margin-right: 15px;
+    margin-right: 1vw;
   }
 
   .submit {

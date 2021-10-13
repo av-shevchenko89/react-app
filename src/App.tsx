@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { DeleteModal, ErrorBoundary, Header, MovieContainer, Movies, SuccessModal } from './Components';
 import { Footer, PopUp } from './Containers';
 import { LogoLink } from './Shared';

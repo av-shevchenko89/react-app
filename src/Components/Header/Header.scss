@@ -2,10 +2,10 @@
 
 header {
   background: url(../../assets/images/bg.png);
-  border-bottom: 10px solid #888;
+  border-bottom: 1vh solid #888;
 
   h1 {
-    margin-left: 120px;
+    margin-left: 10vw;
     font-size: 40px;
     font-weight: 300;
     color: $white;
@@ -14,9 +14,10 @@ header {
 }
 
 nav {
-  padding: 20px 60px 35px;
+  padding: 2vh 5vw 3vh;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   button {
     background: $light_grey;
@@ -25,7 +26,7 @@ nav {
 }
 
 .search {
-  padding: 40px 120px 150px;
+  margin: 4vh 10vw 15vh;
   display: flex;
   font-size: 16px;
   font-weight: 300;
@@ -33,13 +34,13 @@ nav {
 
   input {
     opacity: 0.7;
-    margin-right: 14px;
+    margin-right: 1vw;
     flex: 1;
   }
 
   .btn {
     color: $white;
     background: $red;
-    padding: 10px 30px;
+    padding: 1vh 2vw;
   }
 }

@@ -6,7 +6,7 @@ interface Props {
     onDelete: () => void;
 }
 
-export default function MovieMenu(props: Props) {
+export function MovieMenu(props: Props) {
     const [ menu, setMenu ] = useState(false);
     const { onEdit, onDelete } = props;
 

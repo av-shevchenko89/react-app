@@ -1,6 +1,6 @@
 import React from 'react';
 import { MovieItem } from '../movie';
-import MovieCard from './MovieCard';
+import { MovieCard } from './MovieCard';
 
 interface Props {
     movies: MovieItem[];
@@ -8,7 +8,7 @@ interface Props {
     onDelete: (id: string) => void;
 }
 
-export default function MovieList({ movies, onEdit, onDelete }: Props) {
+export function MovieList({ movies, onEdit, onDelete }: Props) {
     return (
         <div className="movie-list">
             {movies.map(movie =>
