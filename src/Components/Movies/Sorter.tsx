@@ -15,7 +15,7 @@ const sortOptions: SortOption[] = [
     { label: 'Release Date', value: 'year' },
 ];
 
-export default function Sorter({ sortBy, sort }: Props) {
+export function Sorter({ sortBy, sort }: Props) {
     return (
         <div className="sorter">
             <label>Sort By</label>

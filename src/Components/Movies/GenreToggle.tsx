@@ -6,7 +6,7 @@ interface Props {
     setGenre: (genre: string) => void
 }
 
-export default function GenreToggle({ selected, setGenre }: Props) {
+export function GenreToggle({ selected, setGenre }: Props) {
     return (
         <ul className="genre-list">
             {genres.map((genre, i) => (

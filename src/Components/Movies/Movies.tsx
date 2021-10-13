@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import MovieList from '../../Containers/MovieList';
-import { MovieActions } from '../../Containers';
+import { MovieActions, MovieList } from '../../Containers';
 import { MovieItem } from '../../movie';
 import './Movies.scss';
 

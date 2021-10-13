@@ -11,9 +11,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(200px, auto);
-  grid-column-gap: 55px;
-  grid-row-gap: 40px;
-  padding-bottom: 40px;
+  grid-column-gap: 5vw;
+  grid-row-gap: 4vh;
+  padding-bottom: 4vh;
 }
 
 .movie {
@@ -55,8 +55,8 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    width: 10%;
-    min-width: 20px;
+    width: 2.5vw;
+    height: 2.5vw;
     background: #2A202D;
     border-radius: 100%;
     cursor: pointer;

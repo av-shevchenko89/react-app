@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Btn, LogoLink } from '../../Shared';
 import { CreateContext } from '../../App';
 
-export default function Nav() {
+export function Nav() {
     const add = useContext(CreateContext)
 
     return (
