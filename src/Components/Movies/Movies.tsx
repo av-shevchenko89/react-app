@@ -39,11 +39,9 @@ export class Movies extends React.Component<Props, State> {
 
     collectMovies() {
         const { genre, sortBy } = this.state;
+        const movies = this.props.movies.filter(movie => (genre !== 'all') ? movie.genre === genre : true);
 
-        return _.orderBy(
-            this.props.movies.filter(movie => (genre !== 'all') ? movie.genre === genre : true),
-            sortBy, 'asc'
-        );
+        return _.orderBy(movies, sortBy, 'asc');
     }
 
     render() {

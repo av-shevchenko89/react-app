@@ -6,7 +6,7 @@ interface Props {
     onDelete: () => void;
 }
 
-export function Delete({ onDelete }: Props) {
+export function DeleteModal({ onDelete }: Props) {
     return (
         <div className="delete">
             <h1>Delete movie</h1>

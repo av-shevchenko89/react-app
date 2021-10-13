@@ -1,6 +1,6 @@
 import React from 'react';
 import { Movie, MovieItem } from '../../movie';
-import MovieForm from './MovieForm';
+import {MovieForm} from './MovieForm';
 
 interface Props {
     movie?: MovieItem;
@@ -12,7 +12,7 @@ interface State {
     isNew: boolean;
 }
 
-const empty: Movie = {
+const emptyMovie: Movie = {
     title: '',
     year: '',
     genre: '',
@@ -24,7 +24,7 @@ const empty: Movie = {
 
 export class MovieContainer extends React.Component<Props> {
     state: State = {
-        movie: empty,
+        movie: emptyMovie,
         isNew: true
     };
 
@@ -48,17 +48,19 @@ export class MovieContainer extends React.Component<Props> {
     }
 
     handleReset() {
-        this.setState({ movie: empty })
+        this.setState({ movie: emptyMovie })
     }
 
     render() {
         return (
             <>
                 <h1>{this.state.isNew ? 'Add movie' : 'Edit movie'}</h1>
-                <MovieForm movie={this.state.movie}
-                           onChange={this.handleChange}
-                           onSubmit={() => this.props.onSubmit(this.state.movie)}
-                           onReset={this.handleReset} />
+                <MovieForm
+                    movie={this.state.movie}
+                    onChange={this.handleChange}
+                    onSubmit={() => this.props.onSubmit(this.state.movie)}
+                    onReset={this.handleReset}
+                />
             </>
         )
     }

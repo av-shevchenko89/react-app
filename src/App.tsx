@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Delete, ErrorBoundary, Header, MovieContainer, Movies, Success } from './Components';
+import { DeleteModal, ErrorBoundary, Header, MovieContainer, Movies, SuccessModal } from './Components';
 import { Footer, PopUp } from './Containers';
 import { LogoLink } from './Shared';
 import { Movie, MovieItem } from './movie';
@@ -8,9 +8,9 @@ import { MOVIES } from './constants';
 
 interface VisualState {
     showPopup: boolean;
-    current: MovieItem | null;
-    currentId: string;
-    deleteId: string;
+    currentMovie: MovieItem | null;
+    currentMovieId: string;
+    deleteMovieId: string;
     isNew: boolean;
     isSuccess: boolean;
 }
@@ -21,9 +21,9 @@ interface State extends VisualState {
 
 const initial: VisualState = {
     showPopup: false,
-    current: null,
-    currentId: '',
-    deleteId: '',
+    currentMovie: null,
+    currentMovieId: '',
+    deleteMovieId: '',
     isNew: false,
     isSuccess: false
 }
@@ -61,7 +61,7 @@ class App extends React.Component<any, State> {
     }
 
     handleEdit(data: Movie) {
-        const current = this.state.movies.find(m => m.id === this.state.currentId);
+        const current = this.state.movies.find(m => m.id === this.state.currentMovieId);
         const ind = this.state.movies.indexOf(current);
         const updated = Object.assign({}, current, data);
         const movies = [ ...this.state.movies ];
@@ -71,7 +71,7 @@ class App extends React.Component<any, State> {
     }
 
     handleDelete() {
-        const movies = this.state.movies.filter(m => m.id !== this.state.deleteId);
+        const movies = this.state.movies.filter(m => m.id !== this.state.deleteMovieId);
         this.setState({ ...initial, movies });
     }
 
@@ -80,12 +80,12 @@ class App extends React.Component<any, State> {
     }
 
     showDelete(id: string) {
-        this.setState({ showPopup: true, deleteId: id });
+        this.setState({ showPopup: true, deleteMovieId: id });
     }
 
     showEdit(id: string) {
-        const current = this.state.movies.find(m => m.id === id);
-        this.setState({ showPopup: true, current, currentId: id });
+        const currentMovie = this.state.movies.find(m => m.id === id);
+        this.setState({ showPopup: true, currentMovie, currentMovieId: id });
     }
 
     showNew() {
@@ -93,28 +93,49 @@ class App extends React.Component<any, State> {
     }
 
     render() {
-        const { movies, showPopup, current, deleteId, isNew, isSuccess } = this.state;
+        const { movies, showPopup, currentMovie, deleteMovieId, isNew, isSuccess } = this.state;
 
         return (
             <>
                 <CreateContext.Provider value={this.showNew}>
                     <Header />
                 </CreateContext.Provider>
+
                 <ErrorBoundary>
                     <Movies movies={movies} onEdit={this.showEdit} onDelete={this.showDelete} />
                 </ErrorBoundary>
+
                 <Footer>
                     <LogoLink />
                 </Footer>
 
-                {showPopup && (
-                    <PopUp onClose={this.handleClose}>
-                        {deleteId && <Delete onDelete={this.handleDelete} />}
-                        {current && <MovieContainer movie={current} onSubmit={this.handleEdit} />}
-                        {isNew && <MovieContainer onSubmit={this.handleCreate} />}
-                        {isSuccess && <Success />}
-                    </PopUp>
-                )}
+                <PopUp
+                    isOpened={!!(showPopup && deleteMovieId)}
+                    onClose={this.handleClose}
+                >
+                    <DeleteModal onDelete={this.handleDelete} />
+                </PopUp>
+
+                <PopUp
+                    isOpened={!!(showPopup && currentMovie)}
+                    onClose={this.handleClose}
+                >
+                    <MovieContainer movie={currentMovie} onSubmit={this.handleEdit} />
+                </PopUp>
+
+                <PopUp
+                    isOpened={showPopup && isNew}
+                    onClose={this.handleClose}
+                >
+                    <MovieContainer onSubmit={this.handleCreate} />
+                </PopUp>
+
+                <PopUp
+                    isOpened={showPopup && isSuccess}
+                    onClose={this.handleClose}
+                >
+                    <SuccessModal />
+                </PopUp>
             </>
         )
     }

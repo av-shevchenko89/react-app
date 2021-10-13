@@ -1,7 +1,7 @@
 import React from 'react';
 import success from '../../assets/images/ok.svg';
 
-export function Success() {
+export function SuccessModal() {
     return (
         <div className="success">
             <img src={success} alt="success" className="icon" />
