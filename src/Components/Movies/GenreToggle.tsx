@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { genres } from '../../constants';
 
-export default function GenreToggle() {
-    const genres = [ 'all', 'documentary', 'comedy', 'horror', 'crime' ];
-    const [ selected, setGenre ] = useState('all');
+interface Props {
+    selected: string;
+    setGenre: (genre: string) => void
+}
 
+export default function GenreToggle({ selected, setGenre }: Props) {
     return (
         <ul className="genre-list">
             {genres.map((genre, i) => (

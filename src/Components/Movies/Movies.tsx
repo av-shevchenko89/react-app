@@ -1,56 +1,62 @@
 import React from 'react';
+import _ from 'lodash';
+import MovieList from '../../Containers/MovieList';
 import { MovieActions } from '../../Containers';
-import { Movie } from './movie';
-import MovieList from './MovieList';
-
+import { MovieItem } from '../../movie';
 import './Movies.scss';
 
-// mock for data should be get from API
-const movies: Movie[] = [
-    {
-        id: 'mov-1',
-        title: 'Matrix',
-        description: 'Action, Fiction',
-        imageUrl: 'https://s7.vcdn.biz/static/f/1829003011/image.jpg/pt/r300x423x4',
-        year: '1999'
-    },
-    {
-        id: 'mov-2',
-        title: 'Fast & Furious 9',
-        description: 'Action',
-        year: '2020',
-        imageUrl: 'https://s4.vcdn.biz/static/f/3515823751/image.jpg/pt/r193x272x4'
-    },
-    {
-        id: 'mov-3',
-        title: 'The Avengers',
-        description: 'Action',
-        year: '2012',
-        imageUrl: 'https://s9.vcdn.biz/static/f/1101456531/image.jpg/pt/r193x272x4'
-    },
-    {
-        id: 'mov-4',
-        title: 'The Boss Baby',
-        description: 'Comedy, Family, Kids',
-        year: '2017',
-        imageUrl: 'https://s5.vcdn.biz/static/f/1347661391/image.jpg/pt/r300x423x4'
-    },
-    {
-        id: 'mov-5',
-        title: 'Hotel Transylvania',
-        description: 'Comedy, Family, Kids',
-        year: '2018',
-        imageUrl: 'https://s2.vcdn.biz/static/f/1410451571/image.jpg/pt/r300x423x4'
-    }
-]
+interface Props {
+    movies: MovieItem[];
+    onEdit: (id: string) => void;
+    onDelete: (id: string) => void;
+}
 
-export function Movies() {
-    return (
-        <main>
-            <MovieActions />
-            <p className="movie-num">
-                <b>{movies.length}</b> movies found</p>
-            <MovieList movies={movies} />
-        </main>
-    )
+interface State {
+    genre: string;
+    sortBy: string;
+}
+
+export class Movies extends React.Component<Props, State> {
+    state: State = {
+        genre: 'all',
+        sortBy: 'year',
+    };
+
+    constructor(props: Props) {
+        super(props);
+
+        this.setGenre = this.setGenre.bind(this);
+        this.sort = this.sort.bind(this);
+    }
+
+    setGenre(genre: string) {
+        this.setState({ genre });
+    }
+
+    sort(sortBy: string) {
+        this.setState({ sortBy });
+    }
+
+    collectMovies() {
+        const { genre, sortBy } = this.state;
+        const movies = this.props.movies.filter(movie => (genre !== 'all') ? movie.genre === genre : true);
+
+        return _.orderBy(movies, sortBy, 'asc');
+    }
+
+    render() {
+        const { genre, sortBy } = this.state;
+        const { onEdit, onDelete } = this.props;
+        const sorted = this.collectMovies();
+
+        return (
+            <main>
+                <MovieActions genre={genre} setGenre={this.setGenre} sortBy={sortBy} sort={this.sort} />
+
+                <p className="movie-num"><b>{sorted.length}</b> movies found</p>
+
+                <MovieList movies={sorted} onEdit={onEdit} onDelete={onDelete} />
+            </main>
+        )
+    }
 }

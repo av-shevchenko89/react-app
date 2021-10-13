@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+interface Props {
+    sortBy: string;
+    sort: (sortBy: string) => void;
+}
 
 interface SortOption {
     label: string;
@@ -7,12 +12,10 @@ interface SortOption {
 
 const sortOptions: SortOption[] = [
     { label: 'Movie Name', value: 'title' },
-    { label: 'Release Date', value: 'date' },
+    { label: 'Release Date', value: 'year' },
 ];
 
-export default function Sorter() {
-    const [ sortBy, sort ] = useState('date');
-
+export default function Sorter({ sortBy, sort }: Props) {
     return (
         <div className="sorter">
             <label>Sort By</label>
