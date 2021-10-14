@@ -3,6 +3,7 @@
 header {
   background: url(../../assets/images/bg.png);
   border-bottom: 1vh solid #888;
+  height: 45vh;
 
   h1 {
     margin-left: 10vw;
@@ -26,7 +27,7 @@ nav {
 }
 
 .search {
-  margin: 4vh 10vw 15vh;
+  margin: 4vh 10vw;
   display: flex;
   font-size: 16px;
   font-weight: 300;

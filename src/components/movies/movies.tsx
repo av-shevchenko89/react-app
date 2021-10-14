@@ -8,10 +8,11 @@ interface Props {
     movies: Movie[];
     onEdit: (id: string) => void;
     onDelete: (id: string) => void;
+    onSelect: (movie: Movie) => void;
 }
 
 export function Movies(props: Props) {
-    const { movies, onEdit, onDelete } = props;
+    const { movies, onEdit, onDelete, onSelect } = props;
 
     const [ genre, setGenre ] = useState('all');
     const [ sortBy, setSortBy ] = useState('year');
@@ -25,11 +26,21 @@ export function Movies(props: Props) {
 
     return (
         <main>
-            <MovieActions genre={genre} setGenre={setGenre} sortBy={sortBy} sort={setSortBy} />
+            <MovieActions
+                genre={genre}
+                setGenre={setGenre}
+                sortBy={sortBy}
+                sort={setSortBy}
+            />
 
             <p className="movie-num"><b>{sortedMovies.length}</b> movies found</p>
 
-            <MovieList movies={sortedMovies} onEdit={onEdit} onDelete={onDelete} />
+            <MovieList
+                movies={sortedMovies}
+                onEdit={onEdit}
+                onDelete={onDelete}
+                onSelect={onSelect}
+            />
         </main>
     )
 }
