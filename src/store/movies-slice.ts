@@ -38,13 +38,32 @@ export function moviesReducer(state = initialState, action: PayloadAction<any>) 
     }
 }
 
+const config = {
+    baseURL: 'http://localhost:4000',
+}
+
 export async function fetchMovies(dispatch: any, getState: any) {
     const state: AppState = getState();
 
     const { genre, ...rest } = state.filters;
-    const params = { ...rest, filter: genre === 'all' ? [] : [ genre ] }
+    const filter = genre === 'all' ? '' : genre;
 
-    const res = await axios.get('http://localhost:4000/movies', {params});
+    const res = await axios.get(
+        '/movies',
+        { ...config, params: { ...rest, filter } }
+    );
 
     dispatch({ type: 'movies/setMovies', payload: res.data })
+}
+
+export async function addMovie(dispatch: any, getState: any) {
+
+}
+
+export async function editMovie(dispatch: any, getState: any) {
+
+}
+
+export async function removeMovie(dispatch: any, getState: any) {
+
 }

@@ -1,13 +1,13 @@
 export interface FiltersState {
     genre: string;
     sortBy: string;
-    sortOrder: string;
+    sortOrder: 'asc' | 'desc';
     search: string;
 }
 
 const initialState: FiltersState = {
     genre: 'all',
-    sortBy: 'year',
+    sortBy: 'release_date',
     sortOrder: 'desc',
     search: ''
 }
@@ -18,7 +18,8 @@ export function filtersReducer(state = initialState, action: any) {
             return { ...state, genre: action.payload }
         }
         case 'filters/sortingChanged': {
-            return { ...state, sortBy: action.payload }
+            const {sortBy, sortOrder} = action.payload;
+            return { ...state, sortBy, sortOrder }
         }
         default:
             return state

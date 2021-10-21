@@ -1,7 +1,8 @@
 import React, { FormEvent } from 'react';
-import Select from 'react-select'
 import { Movie } from '../../movie';
 import './movie-form.scss';
+import { Genres } from '../../constants';
+import { Multiselect } from 'multiselect-react-dropdown';
 
 interface Props {
     movie: Movie;
@@ -11,7 +12,6 @@ interface Props {
 }
 
 export function MovieForm(props: Props) {
-
     const { movie, onSubmit, onReset, onChange } = props;
 
     const handleSubmit = (e: FormEvent) => {
@@ -73,14 +73,32 @@ export function MovieForm(props: Props) {
                 </div>
                 <div className="form-group">
                     <label>Genre</label>
-                    {/*<Select*/}
-                    {/*    isMulti*/}
-                    {/*    name="genres"*/}
-                    {/*    value={genres}*/}
-                    {/*    options={Genres}*/}
-                    {/*    placeholder="Select Genre"*/}
-                    {/*    onChange={e => handleChange(e, 'genre')}*/}
-                    {/*/>*/}
+                    <Multiselect
+                        isObject={false}
+                        selectedValues={genres}
+                        onSelect={res => onChange('genres', res)}
+                        options={Genres}
+                        placeholder="Select Genre"
+                        style={{
+                            chips: {
+                                background: '#555',
+                                textTransform: 'capitalize'
+                            },
+                            multiselectContainer: {
+                                color: '#424242',
+                                textTransform: 'capitalize'
+                            },
+                            searchBox: {
+                                height: '50px',
+                                background: 'rgba(50, 50, 50, 0.8)',
+                                border: 'none',
+                                padding: '0 20px',
+                                lineHeight: '50px',
+                                verticalAlign: 'middle'
+                            }
+                        }}
+                        showCheckbox
+                    />
                 </div>
                 <div className="form-group">
                     <label>RUNTIME</label>

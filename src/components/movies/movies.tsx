@@ -4,6 +4,8 @@ import { Movie } from '../../movie';
 import './movies.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectGenre, selectMovies, selectSortBy, selectTotal } from '../../store/selectors';
+import { fetchMovies } from '../../store/movies-slice';
+import { Filter } from './sorter';
 
 interface Props {
     onEdit: (movie: Movie) => void;
@@ -23,10 +25,12 @@ export function Movies(props: Props) {
 
     const setGenre = (genre: string) => {
         dispatch({ type: 'filters/genreChanged', payload: genre });
+        dispatch(fetchMovies);
     };
 
-    const setSortBy = (sortBy: string) => {
+    const setSortBy = (sortBy: Filter) => {
         dispatch({ type: 'filters/sortingChanged', payload: sortBy });
+        dispatch(fetchMovies);
     };
 
     return (

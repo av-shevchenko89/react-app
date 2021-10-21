@@ -1,5 +1,5 @@
 import React from 'react';
-import { GenreToggle, Sorter } from '../components';
+import { Filter, GenreToggle, Sorter } from '../components';
 
 import './movie-actions.scss';
 
@@ -7,7 +7,7 @@ interface Props {
     genre: string;
     setGenre: (genre: string) => void;
     sortBy: string;
-    sort: (sortBy: string) => void;
+    sort: (sortBy: Filter) => void;
 }
 
 export const MovieActions = ({ genre, setGenre, sortBy, sort }: Props) => (
