@@ -8,20 +8,28 @@
     "prod": "webpack --env production"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
+    "axios": "^0.23.0",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.5",
+    "react-select": "^5.1.0",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.173",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
+    "@types/react-redux": "^7.1.20",
     "@types/webpack-dev-server": "^4.1.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
     "css-minimizer-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.3.0",
+    "redux-devtools-extension": "^2.13.9",
     "sass": "^1.39.2",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",

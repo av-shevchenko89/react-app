@@ -1,17 +1,19 @@
+import React, { useContext, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Movie } from '../movie';
-import React, { useContext, useEffect, useState } from 'react';
 import { MovieContainer } from '../components';
 import { DeleteModal, ModalContext, SuccessModal } from '../modal';
-import { MockMovies } from '../constants';
+import { fetchMovies } from '../store/movies-slice';
 
 export const useMovies = () => {
     let movieId = '';
-    let [ movies, setMovies ] = useState([]);
-    const { openModal, closeModal } = useContext(ModalContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setMovies(MockMovies);
+        dispatch(fetchMovies);
     }, []);
+
+    const { openModal, closeModal } = useContext(ModalContext);
 
     const handleCreate = () => {
         openModal(<MovieContainer onSubmit={handleCreateRes} />)
@@ -21,22 +23,20 @@ export const useMovies = () => {
         const newMovie: Movie = {
             ...data,
             id: `${Math.round(Math.random() * 100)}`,
-            imageUrl: 'https://media.istockphoto.com/vectors/cinema-and-movie-time-vector-id640312764'
+            poster_path: 'https://media.istockphoto.com/vectors/cinema-and-movie-time-vector-id640312764'
         }
-        setMovies([ ...movies, newMovie ]);
+
+        dispatch({ type: 'movies/addMovie', payload: newMovie });
         openModal(<SuccessModal />);
     }
 
-    const handleEdit = (id: string) => {
-        const currentMovie = movies.find(m => m.id === id);
-        movieId = id;
-        openModal(<MovieContainer movieItem={currentMovie} onSubmit={handleEditRes} />)
+    const handleEdit = (movie: Movie) => {
+        movieId = movie.id;
+        openModal(<MovieContainer movieItem={movie} onSubmit={handleEditRes} />)
     }
 
     const handleEditRes = (data: Movie) => {
-        movies = movies.map(movie => (movie.id === movieId) ? data : movie);
-        setMovies(movies);
-
+        dispatch({ type: 'movies/editMovie', payload: { id: movieId, data } });
         closeModal();
     }
 
@@ -46,11 +46,9 @@ export const useMovies = () => {
     };
 
     const handleDeleteRes = () => {
-        movies = movies.filter(m => m.id !== movieId);
-        setMovies(movies);
-
+        dispatch({ type: 'movies/deleteMovie', payload: movieId });
         closeModal();
     }
 
-    return { movies, handleCreate, handleEdit, handleDelete }
+    return { handleCreate, handleEdit, handleDelete }
 }

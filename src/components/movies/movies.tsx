@@ -1,28 +1,33 @@
-import React, { useMemo, useState } from 'react';
-import _ from 'lodash';
+import React from 'react';
 import { MovieActions, MovieList } from '../../containers';
 import { Movie } from '../../movie';
 import './movies.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectGenre, selectMovies, selectSortBy, selectTotal } from '../../store/selectors';
 
 interface Props {
-    movies: Movie[];
-    onEdit: (id: string) => void;
+    onEdit: (movie: Movie) => void;
     onDelete: (id: string) => void;
     onSelect: (movie: Movie) => void;
 }
 
 export function Movies(props: Props) {
-    const { movies, onEdit, onDelete, onSelect } = props;
+    const { onEdit, onDelete, onSelect } = props;
 
-    const [ genre, setGenre ] = useState('all');
-    const [ sortBy, setSortBy ] = useState('year');
+    const movies = useSelector(selectMovies);
+    const totalAmount = useSelector(selectTotal);
+    const genre = useSelector(selectGenre);
+    const sortBy = useSelector(selectSortBy);
 
-    const collectMovies = (movies: Movie[]) => {
-        const filteredMovies = movies.filter(movie => (genre !== 'all') ? movie.genre === genre : true);
-        return _.sortBy(filteredMovies, sortBy);
-    }
+    const dispatch = useDispatch();
 
-    const sortedMovies = useMemo(() => collectMovies(movies), [ movies, genre, sortBy ]);
+    const setGenre = (genre: string) => {
+        dispatch({ type: 'filters/genreChanged', payload: genre });
+    };
+
+    const setSortBy = (sortBy: string) => {
+        dispatch({ type: 'filters/sortingChanged', payload: sortBy });
+    };
 
     return (
         <main>
@@ -33,10 +38,10 @@ export function Movies(props: Props) {
                 sort={setSortBy}
             />
 
-            <p className="movie-num"><b>{sortedMovies.length}</b> movies found</p>
+            <p className="movie-num"><b>{totalAmount}</b> movies found</p>
 
             <MovieList
-                movies={sortedMovies}
+                movies={movies}
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onSelect={onSelect}

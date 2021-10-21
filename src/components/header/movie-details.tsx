@@ -11,14 +11,14 @@ interface Props {
 }
 
 export function MovieDetails({ movie, goToSearch }: Props) {
-    const { title, genre, year, imageUrl, rating, duration, desc } = movie;
+    const { title, genres, release_date, poster_path, vote_average, runtime, overview } = movie;
 
     const normalizedDuration = useMemo(() => {
-        const hours = Math.floor(duration / 60);
-        const min = duration - hours * 60;
+        const hours = Math.floor(runtime / 60);
+        const min = runtime - hours * 60;
 
         return `${hours}h ${min}min`;
-    }, [ duration ]);
+    }, [ runtime ]);
 
     return (
         <>
@@ -29,18 +29,18 @@ export function MovieDetails({ movie, goToSearch }: Props) {
                 </a>
             </nav>
             <div className="movie-details">
-                <img src={imageUrl} alt="image" />
+                <img src={poster_path} alt="image" />
                 <div>
                     <h1 className="title">
                         {title}
-                        <span className="rating">{rating}</span>
+                        <span className="rating">{vote_average}</span>
                     </h1>
-                    <p className="genre">{genre}</p>
+                    <p className="genre">{genres.join(', ')}</p>
                     <div className="info">
-                        <span className="year">{year}</span>
+                        <span className="year">{release_date}</span>
                         <span>{normalizedDuration}</span>
                     </div>
-                    <p className="description">{desc}</p>
+                    <p className="description">{overview}</p>
                 </div>
             </div>
         </>

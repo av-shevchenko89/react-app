@@ -8,11 +8,13 @@ interface Props {
 interface SortOption {
     label: string;
     value: string;
+    order: 'asc' | 'desc'
 }
 
 const sortOptions: SortOption[] = [
-    { label: 'movie Name', value: 'title' },
-    { label: 'Release Date', value: 'year' },
+    { label: 'Movie Name', value: 'title', order: 'asc' },
+    { label: 'Release Date', value: 'year', order: 'desc' },
+    { label: 'Rating', value: 'rating', order: 'desc' },
 ];
 
 export function Sorter({ sortBy, sort }: Props) {

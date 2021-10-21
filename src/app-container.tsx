@@ -1,14 +1,14 @@
-import { ErrorBoundary, Header, Movies } from '../components';
-import { Footer } from './footer';
-import { LogoLink } from '../shared';
 import React from 'react';
-import { useMovieDetails, useMovies } from '../hooks';
+import { ErrorBoundary, Header, Movies } from './components';
+import { Footer } from './containers';
+import { LogoLink } from './shared';
+import { useMovieDetails, useMovies } from './hooks';
 
 export const CreateContext = React.createContext(() => {
 });
 
 export function AppContainer() {
-    const { movies, handleCreate, handleEdit, handleDelete } = useMovies();
+    const { handleCreate, handleEdit, handleDelete } = useMovies();
     const { details, toggleDetails } = useMovieDetails();
 
     return (
@@ -19,7 +19,6 @@ export function AppContainer() {
 
             <ErrorBoundary>
                 <Movies
-                    movies={movies}
                     onEdit={handleEdit}
                     onDelete={handleDelete}
                     onSelect={toggleDetails}
