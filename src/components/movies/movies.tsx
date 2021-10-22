@@ -1,11 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { MovieActions, MovieList } from '../../containers';
 import { Movie } from '../../movie';
 import './movies.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectGenre, selectMovies, selectSortBy, selectTotal } from '../../store/selectors';
-import { fetchMovies } from '../../store/movies-slice';
-import { Filter } from './sorter';
+import { selectMovies, selectTotal } from '../../store/movies-slice';
 
 interface Props {
     onEdit: (movie: Movie) => void;
@@ -18,29 +16,10 @@ export function Movies(props: Props) {
 
     const movies = useSelector(selectMovies);
     const totalAmount = useSelector(selectTotal);
-    const genre = useSelector(selectGenre);
-    const sortBy = useSelector(selectSortBy);
-
-    const dispatch = useDispatch();
-
-    const setGenre = (genre: string) => {
-        dispatch({ type: 'filters/genreChanged', payload: genre });
-        dispatch(fetchMovies);
-    };
-
-    const setSortBy = (sortBy: Filter) => {
-        dispatch({ type: 'filters/sortingChanged', payload: sortBy });
-        dispatch(fetchMovies);
-    };
 
     return (
         <main>
-            <MovieActions
-                genre={genre}
-                setGenre={setGenre}
-                sortBy={sortBy}
-                sort={setSortBy}
-            />
+            <MovieActions />
 
             <p className="movie-num"><b>{totalAmount}</b> movies found</p>
 

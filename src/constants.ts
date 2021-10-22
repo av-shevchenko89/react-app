@@ -1,6 +1,12 @@
 import { Movie } from './movie';
 
-export const Genres = [ 'all', 'drama', 'comedy', 'fantasy', 'horror' ];
+export const Genres = [
+    { value: '', label: 'All' },
+    { value: 'Drama', label: 'Drama' },
+    { value: 'Comedy', label: 'Comedy' },
+    { value: 'Action', label: 'Action' },
+    { value: 'Horror', label: 'Horror' },
+];
 
 export const EmptyMovie: Movie = {
     title: '',

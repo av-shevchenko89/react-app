@@ -24,8 +24,12 @@ export function MovieForm(props: Props) {
         onReset();
     }
 
-    const handleChange = (e: any, key: string) => {
-        onChange(key, e.target.value);
+    const handleChange = (e: any, key: string, toNumber = false) => {
+        onChange(key, !toNumber ? e.target.value : e.target.valueAsNumber ? e.target.valueAsNumber : 0);
+    }
+
+    const onSelect = (options: { value: string; label: string }[]) => {
+        onChange('genres', options.map(o => o.value))
     }
 
     const { title, genres, poster_path, runtime, overview, release_date, vote_average } = movie;
@@ -49,7 +53,7 @@ export function MovieForm(props: Props) {
                         className="form-control"
                         placeholder="Select date"
                         value={release_date}
-                        onChange={e => handleChange(e, 'year')}
+                        onChange={e => handleChange(e, 'release_date')}
                     />
                 </div>
                 <div className="form-group">
@@ -59,7 +63,7 @@ export function MovieForm(props: Props) {
                         className="form-control"
                         placeholder="http://"
                         value={poster_path}
-                        onChange={e => handleChange(e, 'url')}
+                        onChange={e => handleChange(e, 'poster_path')}
                     />
                 </div>
                 <div className="form-group">
@@ -68,16 +72,16 @@ export function MovieForm(props: Props) {
                         type="number"
                         className="form-control"
                         value={vote_average}
-                        onChange={e => handleChange(e, 'rating')}
+                        onChange={e => handleChange(e, 'vote_average', true)}
                     />
                 </div>
                 <div className="form-group">
                     <label>Genre</label>
                     <Multiselect
-                        isObject={false}
+                        displayValue="label"
                         selectedValues={genres}
-                        onSelect={res => onChange('genres', res)}
-                        options={Genres}
+                        onSelect={onSelect}
+                        options={Genres.slice(1)}
                         placeholder="Select Genre"
                         style={{
                             chips: {
@@ -107,7 +111,7 @@ export function MovieForm(props: Props) {
                         className="form-control"
                         placeholder="minutes"
                         value={runtime}
-                        onChange={e => handleChange(e, 'duration')}
+                        onChange={e => handleChange(e, 'runtime', true)}
                     />
                 </div>
             </div>
@@ -117,7 +121,7 @@ export function MovieForm(props: Props) {
                     className="form-control desc"
                     placeholder="Movie description"
                     value={overview}
-                    onChange={e => handleChange(e, 'desc')}
+                    onChange={e => handleChange(e, 'overview')}
                 />
             </div>
             <div className="form-actions">

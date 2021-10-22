@@ -13,3 +13,13 @@ export interface Movie {
     budget?: number;
     revenue?: number;
 }
+
+export interface MoviesRes {
+    data: Movie[];
+    totalAmount: number;
+}
+
+export interface Filter {
+    sortBy: string;
+    sortOrder: 'asc' | 'desc';
+}

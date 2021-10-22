@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react';
 import { Multiselect } from 'multiselect-react-dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeSortBy, selectFilters } from '../../store/filters-slice';
+import { Filter } from '../../movie';
 
-interface Props {
-    sortBy: string;
-    sort: (data: Filter) => void;
-}
-
-export interface Filter {
-    sortBy: string;
-    sortOrder: 'asc' | 'desc';
-}
 
 interface SortOption extends Filter {
     label: string;
@@ -21,17 +15,22 @@ const options: SortOption[] = [
     { label: 'Rating', sortBy: 'vote_average', sortOrder: 'desc' },
 ];
 
-export function Sorter({ sortBy, sort }: Props) {
-    const onChange = (option: SortOption[]) => {
-        const { label, ...data } = option[0];
-        sort(data);
-    }
-
+export function Sorter() {
     let selected = [ options[1] ];
 
     useEffect(() => {
         selected = options.filter(o => o.sortBy === sortBy)
-    }, [])
+    }, []);
+
+    const filters = useSelector(selectFilters);
+    const { sortBy } = filters;
+
+    const dispatch = useDispatch();
+
+    const onChange = (option: SortOption[]) => {
+        const { label, ...data } = option[0];
+        dispatch(changeSortBy(data));
+    }
 
     return (
         <div className="sorter">
