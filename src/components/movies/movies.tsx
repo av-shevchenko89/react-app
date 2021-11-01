@@ -1,42 +1,30 @@
-import React, { useMemo, useState } from 'react';
-import _ from 'lodash';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { MovieActions, MovieList } from '../../containers';
 import { Movie } from '../../movie';
 import './movies.scss';
+import { selectMovies, selectTotal } from '../../store/movies-slice';
 
 interface Props {
-    movies: Movie[];
-    onEdit: (id: string) => void;
+    onEdit: (movie: Movie) => void;
     onDelete: (id: string) => void;
     onSelect: (movie: Movie) => void;
 }
 
 export function Movies(props: Props) {
-    const { movies, onEdit, onDelete, onSelect } = props;
+    const { onEdit, onDelete, onSelect } = props;
 
-    const [ genre, setGenre ] = useState('all');
-    const [ sortBy, setSortBy ] = useState('year');
-
-    const collectMovies = (movies: Movie[]) => {
-        const filteredMovies = movies.filter(movie => (genre !== 'all') ? movie.genre === genre : true);
-        return _.sortBy(filteredMovies, sortBy);
-    }
-
-    const sortedMovies = useMemo(() => collectMovies(movies), [ movies, genre, sortBy ]);
+    const movies = useSelector(selectMovies);
+    const totalAmount = useSelector(selectTotal);
 
     return (
         <main>
-            <MovieActions
-                genre={genre}
-                setGenre={setGenre}
-                sortBy={sortBy}
-                sort={setSortBy}
-            />
+            <MovieActions />
 
-            <p className="movie-num"><b>{sortedMovies.length}</b> movies found</p>
+            <p className="movie-num"><b>{totalAmount}</b> movies found</p>
 
             <MovieList
-                movies={sortedMovies}
+                movies={movies}
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onSelect={onSelect}

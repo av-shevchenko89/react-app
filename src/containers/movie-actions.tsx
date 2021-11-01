@@ -3,16 +3,9 @@ import { GenreToggle, Sorter } from '../components';
 
 import './movie-actions.scss';
 
-interface Props {
-    genre: string;
-    setGenre: (genre: string) => void;
-    sortBy: string;
-    sort: (sortBy: string) => void;
-}
-
-export const MovieActions = ({ genre, setGenre, sortBy, sort }: Props) => (
+export const MovieActions = () => (
     <div className="actions">
-        <GenreToggle selected={genre} setGenre={setGenre} />
-        <Sorter sortBy={sortBy} sort={sort} />
+        <GenreToggle />
+        <Sorter />
     </div>
 )

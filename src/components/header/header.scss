@@ -3,7 +3,7 @@
 header {
   background: url(../../assets/images/bg.png);
   border-bottom: 1vh solid #888;
-  height: 45vh;
+  height: 50vh;
 
   h1 {
     margin-left: 10vw;
@@ -37,6 +37,7 @@ nav {
     opacity: 0.7;
     margin-right: 1vw;
     flex: 1;
+    color: $white;
   }
 
   .btn {

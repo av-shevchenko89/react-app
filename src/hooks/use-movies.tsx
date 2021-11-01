@@ -1,56 +1,49 @@
+import React, { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Movie } from '../movie';
-import React, { useContext, useEffect, useState } from 'react';
 import { MovieContainer } from '../components';
 import { DeleteModal, ModalContext, SuccessModal } from '../modal';
-import { MockMovies } from '../constants';
+import { addMovie, editMovie, fetchMovies, removeMovie, selectNewMovie } from '../store/movies-slice';
 
 export const useMovies = () => {
-    let movieId = '';
-    let [ movies, setMovies ] = useState([]);
-    const { openModal, closeModal } = useContext(ModalContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setMovies(MockMovies);
+        dispatch(fetchMovies());
     }, []);
+
+    const { openModal, closeModal } = useContext(ModalContext);
+    const newMovie = useSelector(selectNewMovie);
+
+    useEffect(() => {
+        if (newMovie) openModal(<SuccessModal />);
+    }, [ newMovie ])
 
     const handleCreate = () => {
         openModal(<MovieContainer onSubmit={handleCreateRes} />)
     }
 
-    const handleCreateRes = (data: Movie) => {
-        const newMovie: Movie = {
-            ...data,
-            id: `${Math.round(Math.random() * 100)}`,
-            imageUrl: 'https://media.istockphoto.com/vectors/cinema-and-movie-time-vector-id640312764'
-        }
-        setMovies([ ...movies, newMovie ]);
-        openModal(<SuccessModal />);
+    const handleCreateRes = (movie: Movie) => {
+        dispatch(addMovie(movie));
     }
 
-    const handleEdit = (id: string) => {
-        const currentMovie = movies.find(m => m.id === id);
-        movieId = id;
-        openModal(<MovieContainer movieItem={currentMovie} onSubmit={handleEditRes} />)
+    const handleEdit = (movie: Movie) => {
+        openModal(<MovieContainer movieItem={movie} onSubmit={handleEditRes} />)
     }
 
-    const handleEditRes = (data: Movie) => {
-        movies = movies.map(movie => (movie.id === movieId) ? data : movie);
-        setMovies(movies);
-
+    const handleEditRes = (movie: Movie) => {
+        dispatch(editMovie(movie));
         closeModal();
     }
 
     const handleDelete = (id: string) => {
-        movieId = id;
-        openModal(<DeleteModal onDelete={handleDeleteRes} />)
+        openModal(<DeleteModal id={id} onDelete={handleDeleteRes} />)
     };
 
-    const handleDeleteRes = () => {
-        movies = movies.filter(m => m.id !== movieId);
-        setMovies(movies);
-
+    const handleDeleteRes = (id: string) => {
+        dispatch(removeMovie(id));
         closeModal();
     }
 
-    return { movies, handleCreate, handleEdit, handleDelete }
+    return { handleCreate, handleEdit, handleDelete }
 }

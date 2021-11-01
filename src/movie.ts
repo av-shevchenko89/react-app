@@ -1,11 +1,25 @@
 export interface Movie {
-    title: string;
-    year: string;
-    genre: string;
-    url: string;
-    rating: number;
-    duration: number;
-    desc: string;
     id?: string;
-    imageUrl?: string;
+    title: string;
+    poster_path: string;
+    overview: string;
+    runtime: number;
+    genres: string[];
+
+    tagline?: string;
+    vote_average?: number;
+    vote_count?: number;
+    release_date?: string;
+    budget?: number;
+    revenue?: number;
+}
+
+export interface MoviesRes {
+    data: Movie[];
+    totalAmount: number;
+}
+
+export interface Filter {
+    sortBy: string;
+    sortOrder: 'asc' | 'desc';
 }
