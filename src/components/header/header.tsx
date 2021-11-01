@@ -8,15 +8,15 @@ import { MovieDetails } from './movie-details';
 import { Movie } from '../../movie';
 
 interface Props {
-    details: Movie,
-    toggleDetails: () => void
+    details: Movie;
+    toggleDetails: () => void;
 }
 
 export function Header({ details, toggleDetails }: Props) {
     if (details) {
         return (
             <header>
-                <MovieDetails movie={details} goToSearch={() => toggleDetails()} />
+                <MovieDetails movie={details} goToSearch={toggleDetails} />
             </header>
         )
     }
