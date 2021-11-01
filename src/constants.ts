@@ -1,9 +1,9 @@
-import { MovieItem } from './movie';
+import { Movie } from './movie';
 
-export const genres = [ 'all', 'fiction', 'comedy', 'action', 'horror' ];
+export const Genres = [ 'all', 'fiction', 'comedy', 'action', 'horror' ];
 
 // mock for data should be get from API
-export const MOVIES: MovieItem[] = [
+export const MockMovies: Movie[] = [
     {
         id: 'mov-1',
         title: 'Matrix',
@@ -60,3 +60,13 @@ export const MOVIES: MovieItem[] = [
         rating: 8
     }
 ]
+
+export const EmptyMovie: Movie = {
+    title: '',
+    year: '',
+    genre: '',
+    url: '',
+    rating: 0,
+    duration: 0,
+    desc: '',
+}

@@ -1,0 +1,58 @@
+@import "src/styles/colors";
+
+.search-icon {
+  cursor: pointer;
+}
+
+.movie-details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 5vw;
+  padding: 0 5vw 3vh;
+  color: #888;
+  font-weight: 300;
+
+  img {
+    display: block;
+    height: calc(36vh - 34px);
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin: 0;
+    color: $white;
+  }
+
+  .rating {
+    display: inline-block;
+    width: 49px;
+    height: 49px;
+    border: 1px solid $white;
+    border-radius: 100%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 49px;
+    vertical-align: middle;
+    margin-left: 2vw;
+  }
+
+  .genre {
+    font-size: 14px;
+    text-transform: capitalize;
+    font-weight: normal;
+  }
+
+  .info {
+    color: $red;
+    font-size: 24px;
+    margin: 2vh 0;
+  }
+
+  .year {
+    margin-right: 5vw;
+  }
+
+  .description {
+    font-size: 20px;
+  }
+}

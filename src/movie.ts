@@ -6,9 +6,6 @@ export interface Movie {
     rating: number;
     duration: number;
     desc: string;
-}
-
-export interface MovieItem extends Movie {
-    id: string;
-    imageUrl: string;
+    id?: string;
+    imageUrl?: string;
 }
