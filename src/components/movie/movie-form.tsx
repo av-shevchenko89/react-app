@@ -1,8 +1,7 @@
 import React, { FormEvent } from 'react';
 import { Movie } from '../../movie';
+import { GenreSelect } from './genre-select';
 import './movie-form.scss';
-import { Genres } from '../../constants';
-import { Multiselect } from 'multiselect-react-dropdown';
 
 interface Props {
     movie: Movie;
@@ -25,11 +24,15 @@ export function MovieForm(props: Props) {
     }
 
     const handleChange = (e: any, key: string, toNumber = false) => {
-        onChange(key, !toNumber ? e.target.value : e.target.valueAsNumber ? e.target.valueAsNumber : 0);
+        const value = !toNumber
+            ? e.target.value
+            : e.target.valueAsNumber || 0;
+
+        onChange(key, value);
     }
 
-    const onSelect = (options: { value: string; label: string }[]) => {
-        onChange('genres', options.map(o => o.value))
+    const onSelect = (options: string[]) => {
+        onChange('genres', options);
     }
 
     const { title, genres, poster_path, runtime, overview, release_date, vote_average } = movie;
@@ -77,32 +80,7 @@ export function MovieForm(props: Props) {
                 </div>
                 <div className="form-group">
                     <label>Genre</label>
-                    <Multiselect
-                        displayValue="label"
-                        selectedValues={genres}
-                        onSelect={onSelect}
-                        options={Genres.slice(1)}
-                        placeholder="Select Genre"
-                        style={{
-                            chips: {
-                                background: '#555',
-                                textTransform: 'capitalize'
-                            },
-                            multiselectContainer: {
-                                color: '#424242',
-                                textTransform: 'capitalize'
-                            },
-                            searchBox: {
-                                height: '50px',
-                                background: 'rgba(50, 50, 50, 0.8)',
-                                border: 'none',
-                                padding: '0 20px',
-                                lineHeight: '50px',
-                                verticalAlign: 'middle'
-                            }
-                        }}
-                        showCheckbox
-                    />
+                    <GenreSelect genres={genres} onSelect={onSelect} />
                 </div>
                 <div className="form-group">
                     <label>RUNTIME</label>
@@ -110,7 +88,7 @@ export function MovieForm(props: Props) {
                         type="number"
                         className="form-control"
                         placeholder="minutes"
-                        value={runtime}
+                        value={runtime || 0}
                         onChange={e => handleChange(e, 'runtime', true)}
                     />
                 </div>

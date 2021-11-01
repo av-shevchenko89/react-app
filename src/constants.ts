@@ -8,6 +8,23 @@ export const Genres = [
     { value: 'Horror', label: 'Horror' },
 ];
 
+export const GenreOptions = [
+    'Drama',
+    'Comedy',
+    'Action',
+    'Horror',
+    'Adventure',
+    'Science Fiction',
+    'Thriller',
+    'TV Movie',
+    'History',
+    'Romance',
+    'Fantasy',
+    'Animation',
+    'Family',
+    'Mystery'
+]
+
 export const EmptyMovie: Movie = {
     title: '',
     poster_path: '',
