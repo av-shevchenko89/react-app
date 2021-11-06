@@ -29,8 +29,8 @@ export const EmptyMovie: Movie = {
     title: '',
     poster_path: '',
     overview: '',
-    runtime: 0,
+    runtime: undefined,
     genres: [],
     release_date: '',
-    vote_average: 0
+    vote_average: undefined
 }

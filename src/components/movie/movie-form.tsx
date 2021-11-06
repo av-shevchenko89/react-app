@@ -1,111 +1,160 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
+import { Form, Field } from 'react-final-form';
 import { Movie } from '../../movie';
 import { GenreSelect } from './genre-select';
+import { composeValidators, maxValue, minValue, mustBeNumber, notEmpty, required } from './validators';
 import './movie-form.scss';
 
 interface Props {
     movie: Movie;
-    onChange: (key: string, value: any) => void;
-    onSubmit: () => void;
+    onSubmit: (movie: Movie) => void;
     onReset: () => void;
 }
 
 export function MovieForm(props: Props) {
-    const { movie, onSubmit, onReset, onChange } = props;
+    const { movie, onSubmit, onReset } = props;
 
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        onSubmit();
-    }
-
-    const handleReset = (e: FormEvent) => {
-        e.preventDefault();
+    const handleReset = (form: any) => {
         onReset();
+        form.restart();
     }
-
-    const handleChange = (e: any, key: string, toNumber = false) => {
-        const value = !toNumber
-            ? e.target.value
-            : e.target.valueAsNumber || 0;
-
-        onChange(key, value);
-    }
-
-    const onSelect = (options: string[]) => {
-        onChange('genres', options);
-    }
-
-    const { title, genres, poster_path, runtime, overview, release_date, vote_average } = movie;
 
     return (
-        <form onSubmit={handleSubmit} onReset={handleReset}>
-            <div className="form-grid">
-                <div className="form-group">
-                    <label>Title</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Title" value={title}
-                        onChange={e => handleChange(e, 'title')}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>RELEASE DATE</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Select date"
-                        value={release_date}
-                        onChange={e => handleChange(e, 'release_date')}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>movie url</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="http://"
-                        value={poster_path}
-                        onChange={e => handleChange(e, 'poster_path')}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>RATING</label>
-                    <input
-                        type="number"
-                        className="form-control"
-                        value={vote_average}
-                        onChange={e => handleChange(e, 'vote_average', true)}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Genre</label>
-                    <GenreSelect genres={genres} onSelect={onSelect} />
-                </div>
-                <div className="form-group">
-                    <label>RUNTIME</label>
-                    <input
-                        type="number"
-                        className="form-control"
-                        placeholder="minutes"
-                        value={runtime || 0}
-                        onChange={e => handleChange(e, 'runtime', true)}
-                    />
-                </div>
-            </div>
-            <div className="form-group">
-                <label>Overview</label>
-                <textarea
-                    className="form-control desc"
-                    placeholder="Movie description"
-                    value={overview}
-                    onChange={e => handleChange(e, 'overview')}
-                />
-            </div>
-            <div className="form-actions">
-                <button type="reset" className="btn reset">Reset</button>
-                <button type="submit" className="btn submit">Submit</button>
-            </div>
-        </form>
+        <Form
+            onSubmit={onSubmit}
+            initialValues={movie}
+            subscription={{ submitting: true, pristine: true }}
+            render={({ handleSubmit, form, submitting }) => (
+                <form onSubmit={handleSubmit}>
+                    <div className="form-grid">
+                        <Field name="title" validate={required}>
+                            {({ input, meta }) => (
+                                <div className="form-group">
+                                    <label>Title</label>
+                                    <input
+                                        {...input}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Title"
+                                    />
+                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field name="release_date">
+                            {({ input }) => (
+                                <div className="form-group">
+                                    <label>RELEASE DATE</label>
+                                    <input
+                                        {...input}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Select date"
+                                    />
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field name="poster_path" validate={required}>
+                            {({ input, meta }) => (
+                                <div className="form-group">
+                                    <label>movie url</label>
+                                    <input
+                                        {...input}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="http://"
+                                    />
+                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field
+                            name="vote_average"
+                            validate={composeValidators(mustBeNumber, minValue(0), maxValue(10))}
+                        >
+                            {({ input, meta }) => (
+                                <div className="form-group">
+                                    <label>RATING</label>
+                                    <input
+                                        {...input}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="7.8"
+                                    />
+                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field name="genres" validate={notEmpty} multiple={true}>
+                            {({ input, meta }) => (
+                                <div className="form-group">
+                                    <label>Genre</label>
+                                    <GenreSelect
+                                        genres={input.value}
+                                        onChange={input.onChange}
+                                    />
+                                    {meta.error && (meta.touched || meta.modified) && <span>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field
+                            name="runtime"
+                            validate={composeValidators(required, mustBeNumber, minValue(0), maxValue(128))}
+                        >
+                            {({ input, meta }) => (
+                                <div className="form-group">
+                                    <label>RUNTIME</label>
+                                    <input
+                                        {...input}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Minutes"
+                                    />
+                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
+                    </div>
+
+                    <Field name="overview" validate={required}>
+                        {({ input, meta }) => (
+                            <div className="form-group">
+                                <label>Overview</label>
+                                <textarea
+                                    {...input}
+                                    className="form-control desc"
+                                    placeholder="Movie description"
+                                />
+                                {meta.error && meta.touched && <span>{meta.error}</span>}
+                            </div>
+                        )}
+                    </Field>
+
+                    <div className="form-actions">
+                        <button
+                            type="button"
+                            className="btn reset"
+                            onClick={() => handleReset(form)}
+                            disabled={submitting}
+                        >
+                            Reset
+                        </button>
+                        <button
+                            type="submit"
+                            className="btn submit"
+                            disabled={submitting}
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </form>
+
+            )}
+        />
     )
 }
