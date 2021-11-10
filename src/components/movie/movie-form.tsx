@@ -11,6 +11,10 @@ interface Props {
     onReset: () => void;
 }
 
+const toNumber =  (value: string) => {
+     return value ? parseInt(value) : value;
+};
+
 export function MovieForm(props: Props) {
     const { movie, onSubmit, onReset } = props;
 
@@ -74,6 +78,7 @@ export function MovieForm(props: Props) {
                         <Field
                             name="vote_average"
                             validate={composeValidators(mustBeNumber, minValue(0), maxValue(10))}
+                            parse={toNumber}
                         >
                             {({ input, meta }) => (
                                 <div className="form-group">
@@ -105,6 +110,7 @@ export function MovieForm(props: Props) {
                         <Field
                             name="runtime"
                             validate={composeValidators(required, mustBeNumber, minValue(0), maxValue(128))}
+                            parse={toNumber}
                         >
                             {({ input, meta }) => (
                                 <div className="form-group">
