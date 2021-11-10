@@ -4,16 +4,17 @@ import { GenreOptions } from '../../constants';
 
 interface Props {
     genres: string[];
-    onSelect: (options: string[]) => void;
+    onChange: (options: string[]) => void;
 }
 
-export function GenreSelect({ genres, onSelect }: Props) {
+export function GenreSelect({ genres, onChange }: Props) {
     return (
         <Multiselect
             isObject={false}
             displayValue="label"
             selectedValues={genres}
-            onSelect={onSelect}
+            onSelect={onChange}
+            onRemove={onChange}
             options={GenreOptions}
             placeholder="Select Genre"
             style={{
@@ -31,7 +32,8 @@ export function GenreSelect({ genres, onSelect }: Props) {
                     border: 'none',
                     padding: '0 20px',
                     lineHeight: '50px',
-                    verticalAlign: 'middle'
+                    verticalAlign: 'middle',
+                    overflow: 'hidden'
                 }
             }}
             showCheckbox
