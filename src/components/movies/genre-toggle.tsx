@@ -1,17 +1,12 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { Genres } from '../../constants';
-import { changeGenre, selectFilters } from '../../store/filters-slice';
 
 export function GenreToggle() {
-    const dispatch = useDispatch();
+const [selected, setGenre] = useState('');
 
-    const filters = useSelector(selectFilters);
-    const { genre: selected } = filters;
+useEffect(() => {
 
-    const setGenre = (genre: string) => {
-        dispatch(changeGenre(genre));
-    }
+}, [selected]);
 
     return (
         <ul className="genre-list">

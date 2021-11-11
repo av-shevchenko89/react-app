@@ -1,8 +1,9 @@
-import React from 'react';
-import logo from '../assets/images/logo.svg';
+import React from "react";
+import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.svg";
 
-export const LogoLink = ({ link = '/' }) => (
-    <a href={link}>
-        <img src={logo} alt="netflix" />
-    </a>
-)
+export const LogoLink = ({ link = "/" }) => (
+  <Link to={link}>
+    <img src={logo} alt="netflix" />
+  </Link>
+);
