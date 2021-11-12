@@ -1,7 +1,7 @@
 import React from 'react';
 import { SearchPage } from './pages/search-page';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import { NotFound } from './components';
+import { Layout, NotFound } from './components';
 import { ModalProvider } from './modal';
 
 export function App() {
@@ -18,8 +18,4 @@ export function App() {
       </Routes>
     </ModalProvider>
   );
-}
-
-function Layout() {
-  return <Outlet/>;
 }

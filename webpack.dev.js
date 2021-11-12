@@ -23,4 +23,7 @@ module.exports = merge(common, {
             }
         ],
     },
+    output: {
+        publicPath: '/'
+     },
 });
