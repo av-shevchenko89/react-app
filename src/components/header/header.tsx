@@ -9,10 +9,11 @@ import { Movie } from '../../movie';
 
 interface Props {
   details: Movie;
+  searchQuery: string;
   toggleDetails: () => void;
 }
 
-export function Header({ details, toggleDetails }: Props) {
+export function Header({ details, toggleDetails, searchQuery }: Props) {
   if (details) {
     return (
       <header>
@@ -25,7 +26,7 @@ export function Header({ details, toggleDetails }: Props) {
     <header>
       <Nav />
       <Title text="Find your movie" />
-      <Search />
+      <Search searchQuery={searchQuery} />
     </header>
   );
 }

@@ -12,8 +12,9 @@ export function App() {
 
         <Route path="search" element={<Layout />}>
           <Route index element={<SearchPage />} />
-          <Route path=":searchQuery" element={<SearchPage />} />
+          <Route path=":searchQuery" element={<SearchPage />} caseSensitive />
         </Route>
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </ModalProvider>

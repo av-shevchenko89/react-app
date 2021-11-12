@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Btn } from "../../shared";
+import React, { useState, useEffect, useContext } from 'react';
+import { HeaderContext } from '../../pages/search-page';
+import { Btn } from '../../shared';
 
-export function Search() {
-  const [value, setSearchVal] = useState("");
+export function Search({ searchQuery }: { searchQuery: string }) {
+  const [value, setSearchVal] = useState('');
+  const {handleSearch} = useContext(HeaderContext);
 
-  useEffect(() => {}, []);
-
-  const searchMovie = () => {};
+  useEffect(() => {
+    setSearchVal(searchQuery || '');
+  }, [searchQuery]);
 
   return (
     <div className="search">
@@ -17,7 +19,7 @@ export function Search() {
         value={value}
         onChange={(e) => setSearchVal(e.target.value)}
       />
-      <Btn label="Search" onClick={() => searchMovie()} />
+      <Btn label="Search" onClick={() => handleSearch(value)} />
     </div>
   );
 }

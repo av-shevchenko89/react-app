@@ -21,13 +21,15 @@ export const useMovies = () => {
 
   const collectParams = () => {
     // @ts-ignore
-    const {genre, sortBy, sortOrder} = params;
+    const {genre, sortBy, sortOrder, searchQuery} = params;
 
     return {
       limit: 12,
       filter: (genre && genre !== 'all') ? genre : undefined,
       sortBy: sortBy || 'release_date',
       sortOrder: sortOrder || 'desc',
+      searchBy: 'title',
+      search: searchQuery
     };
   };
 
