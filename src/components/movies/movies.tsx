@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { MovieActions, MovieList } from '../../containers';
 import { Movie } from '../../movie';
 import './movies.scss';
@@ -8,12 +9,12 @@ interface Props {
     totalAmount: number;
     onEdit: (movie: Movie) => void;
     onDelete: (id: string) => void;
-    onSelect: (movie: Movie) => void;
+    onSelect: (id: string) => void;
 }
 
 export function Movies(props: Props) {
-    const { onEdit, onDelete, onSelect, movies, totalAmount } = props;
-
+    const { onEdit, onDelete, movies, totalAmount, onSelect } = props;
+    
     return (
         <main>
             <MovieActions />

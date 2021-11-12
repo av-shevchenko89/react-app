@@ -1,23 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
+import React, { useContext } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Genres } from '../../constants';
+import { FilterContext } from '../../pages/search-page';
 
 export function GenreToggle() {
-const [selected, setGenre] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const {changeParams} = useContext(FilterContext);
 
-useEffect(() => {
+  const selected = searchParams.get('genre') || 'all';
 
-}, [selected]);
+  const handleSelect = (genre: string) => {
+    changeParams({genre});
+  }
 
-    return (
-        <ul className="genre-list">
-            {Genres.map((genre, i) => (
-                    <li key={i}
-                        className={genre.value === selected ? 'selected' : ''}
-                        onClick={() => setGenre(genre.value)}>
-                        {genre.label}
-                    </li>
-                )
-            )}
-        </ul>
-    )
+  return (
+    <ul className="genre-list">
+      {Genres.map((genre, i) => (
+        <li
+          key={i}
+          className={genre.value.toLowerCase() === selected.toLowerCase() ? 'selected' : ''}
+          onClick={() => handleSelect(genre.value)}
+        >
+          {genre.label}
+        </li>
+      ))}
+    </ul>
+  );
 }

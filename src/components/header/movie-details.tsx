@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { Movie } from '../../movie';
 import { LogoLink } from '../../shared';
-// @ts-ignore
 import searchIcon from '../../assets/images/search.svg';
 import './movie-details.scss';
+import { useSearchParams } from 'react-router-dom';
 
 interface Props {
     movie: Movie;
@@ -11,6 +11,8 @@ interface Props {
 }
 
 export function MovieDetails({ movie, goToSearch }: Props) {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const { title, genres, release_date, poster_path, vote_average, runtime, overview } = movie;
 
     const normalizedDuration = useMemo(() => {
@@ -20,11 +22,16 @@ export function MovieDetails({ movie, goToSearch }: Props) {
         return `${hours}h ${min}min`;
     }, [ runtime ]);
 
+    const handleClick =(e: any) => {
+        e.preventDefault();
+        setSearchParams({});
+    }
+
     return (
         <>
             <nav>
                 <LogoLink />
-                <a className="search-icon" onClick={goToSearch}>
+                <a className="search-icon" onClick={handleClick}>
                     <img src={searchIcon} alt="" />
                 </a>
             </nav>

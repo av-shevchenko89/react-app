@@ -6,7 +6,7 @@ interface Props {
     movies: Movie[];
     onEdit: (movie: Movie) => void;
     onDelete: (id: string) => void;
-    onSelect: (movie: Movie) => void;
+    onSelect: (id: string) => void;
 }
 
 export function MovieList({ movies, onEdit, onDelete, onSelect }: Props) {
@@ -18,7 +18,7 @@ export function MovieList({ movies, onEdit, onDelete, onSelect }: Props) {
                     movie={movie}
                     onEdit={() => onEdit(movie)}
                     onDelete={() => onDelete(movie.id)}
-                    onSelect={() => onSelect(movie)}
+                    onSelect={() => onSelect(movie.id)}
                 />
             )}
         </div>
