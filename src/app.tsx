@@ -1,17 +1,25 @@
-import React from "react";
-import { SearchPage } from "./pages/search-page";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { NotFound } from "./components";
-import { ModalProvider } from "./modal";
+import React from 'react';
+import { SearchPage } from './pages/search-page';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { NotFound } from './components';
+import { ModalProvider } from './modal';
 
 export function App() {
   return (
     <ModalProvider>
       <Routes>
         <Route path="/" element={<Navigate to="search" replace />} />
-        <Route path="search" element={<SearchPage />} />
+
+        <Route path="search" element={<Layout />}>
+          <Route index element={<SearchPage />} />
+          <Route path=":searchQuery" element={<SearchPage />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </ModalProvider>
   );
+}
+
+function Layout() {
+  return <Outlet/>;
 }

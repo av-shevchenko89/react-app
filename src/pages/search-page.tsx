@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ErrorBoundary, Header, Movies } from '../components';
 import { Footer } from '../containers';
 import { LogoLink } from '../shared';
 import { useMovieDetails, useMovies } from '../hooks';
 import { useSearchParams } from 'react-router-dom';
-import _, { sortBy } from 'lodash';
+import _ from 'lodash';
 import { MoviesFilter } from '../movie';
 
 export const CreateContext = React.createContext(() => {});
