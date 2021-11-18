@@ -1,22 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { MovieActions, MovieList } from '../../containers';
 import { Movie } from '../../movie';
 import './movies.scss';
-import { selectMovies, selectTotal } from '../../store/movies-slice';
 
 interface Props {
+    movies: Movie[];
+    totalAmount: number;
     onEdit: (movie: Movie) => void;
     onDelete: (id: string) => void;
-    onSelect: (movie: Movie) => void;
+    onSelect: (id: string) => void;
 }
 
 export function Movies(props: Props) {
-    const { onEdit, onDelete, onSelect } = props;
-
-    const movies = useSelector(selectMovies);
-    const totalAmount = useSelector(selectTotal);
-
+    const { onEdit, onDelete, movies, totalAmount, onSelect } = props;
+    
     return (
         <main>
             <MovieActions />

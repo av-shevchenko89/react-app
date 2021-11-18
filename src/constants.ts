@@ -1,7 +1,7 @@
 import { Movie } from './movie';
 
 export const Genres = [
-    { value: '', label: 'All' },
+    { value: 'all', label: 'All' },
     { value: 'Drama', label: 'Drama' },
     { value: 'Comedy', label: 'Comedy' },
     { value: 'Action', label: 'Action' },

@@ -12,7 +12,8 @@ module.exports = merge(common, {
         hot: true,
         compress: true,
         port: 3000,
-        open: true
+        open: true,
+        historyApiFallback: true
     },
     module: {
         rules: [
@@ -22,4 +23,7 @@ module.exports = merge(common, {
             }
         ],
     },
+    output: {
+        publicPath: '/'
+     },
 });

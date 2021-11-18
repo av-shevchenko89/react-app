@@ -8,24 +8,25 @@ import { MovieDetails } from './movie-details';
 import { Movie } from '../../movie';
 
 interface Props {
-    details: Movie;
-    toggleDetails: () => void;
+  details: Movie;
+  searchQuery: string;
+  toggleDetails: () => void;
 }
 
-export function Header({ details, toggleDetails }: Props) {
-    if (details) {
-        return (
-            <header>
-                <MovieDetails movie={details} goToSearch={toggleDetails} />
-            </header>
-        )
-    }
-
+export function Header({ details, toggleDetails, searchQuery }: Props) {
+  if (details) {
     return (
-        <header>
-            <Nav />
-            <Title text="Find your movie" />
-            <Search />
-        </header>
-    )
+      <header>
+        <MovieDetails movie={details} goToSearch={toggleDetails} />
+      </header>
+    );
+  }
+
+  return (
+    <header>
+      <Nav />
+      <Title text="Find your movie" />
+      <Search searchQuery={searchQuery} />
+    </header>
+  );
 }
