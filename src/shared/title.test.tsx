@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Title } from '../shared';
+import { Title } from './title';
 
 test('Title contains correct text', () => {
   render(<Title text="I'm title" />);

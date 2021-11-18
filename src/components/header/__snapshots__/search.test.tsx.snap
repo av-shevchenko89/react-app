@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="search"
+>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder="What do you want to watch?"
+    type="text"
+    value=""
+  />
+  <button
+    className="btn"
+    onClick={[Function]}
+  >
+    Search
+  </button>
+</div>
+`;
