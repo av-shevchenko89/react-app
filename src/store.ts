@@ -1,10 +1,16 @@
-import { applyMiddleware, createStore } from 'redux';
-import thunkMiddleware from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { appReducer } from './store/reducer';
+import { configureStore } from '@reduxjs/toolkit';
 
-const composedEnhancer = composeWithDevTools(
-    applyMiddleware(thunkMiddleware)
-)
+import moviesReducer, { MoviesState } from './store/movies-slice';
+import filtersReducer, { FiltersState } from './store/filters-slice';
 
-export const store = createStore(appReducer, composedEnhancer);
+export interface AppState {
+  movies: MoviesState;
+  filters: FiltersState;
+}
+
+export const store = configureStore({
+  reducer: {
+    movies: moviesReducer,
+    filters: filtersReducer,
+  },
+});

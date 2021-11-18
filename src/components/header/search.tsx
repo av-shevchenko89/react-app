@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Btn } from '../../shared';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeSearch, selectFilters } from '../../store/filters-slice';
+interface Props {
+  searchVal?: string;
+  searchMovie: (value: string) => void;
+}
 
-export function Search() {
-    const dispatch = useDispatch();
-    const filters = useSelector(selectFilters);
-    const { search } = filters;
+export function Search(props: Props) {
+  const { searchVal, searchMovie } = props;
+  const [value, setSearchVal] = useState('');
 
-    const [ value, setSearchVal ] = useState('');
+  useEffect(() => {
+    setSearchVal(searchVal);
+  }, []);
 
-    useEffect(() => {
-        setSearchVal(search)
-    }, [ search ]);
-
-    const searchMovie = () => {
-        dispatch(changeSearch(value));
-    }
-
-    return (
-        <div className="search">
-            <input type="text"
-                   placeholder="What do you want to watch?"
-                   className="form-control"
-                   value={value}
-                   onChange={e => setSearchVal(e.target.value)} />
-            <Btn label="Search" onClick={() => searchMovie()} />
-        </div>
-    )
+  return (
+    <div className="search">
+      <input
+        type="text"
+        placeholder="What do you want to watch?"
+        className="form-control"
+        value={value}
+        onChange={(e) => setSearchVal(e.target.value)}
+      />
+      <Btn label="Search" onClick={() => searchMovie(value)} />
+    </div>
+  );
 }
