@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: path.join(__dirname, 'src', 'index.tsx'),
+    entry: path.join(__dirname, 'src', 'client.tsx'),
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
