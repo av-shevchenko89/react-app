@@ -1,10 +1,14 @@
 import React from 'react';
 import { SearchPage } from './pages/search-page';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
 import { Layout, NotFound } from './components';
 import { ModalProvider } from './modal';
+export interface AppContext {
+  url: string;
+}
 
-export function App() {
+function App() {
   return (
     <ModalProvider>
       <Routes>
@@ -14,9 +18,11 @@ export function App() {
           <Route index element={<SearchPage />} />
           <Route path=":searchQuery" element={<SearchPage />} caseSensitive />
         </Route>
-        
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </ModalProvider>
   );
 }
+
+export default hot(module)(App);

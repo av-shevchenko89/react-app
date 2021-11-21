@@ -1,14 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import { App } from "./app";
-import "./style.scss";
+import React from 'react';
+import { hydrate } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import App from './app';
+import './style.scss';
 
-ReactDOM.render(
+const app = (
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
+
+hydrate(app, document.getElementById('root'));
