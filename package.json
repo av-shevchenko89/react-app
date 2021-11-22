@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "webpack",
-    "start": "webpack serve",
-    "prod": "webpack --env production"
+    "start:ssr": "webpack --config webpack.server.js && node ./server",
+    "build:ssr": "webpack --config webpack.server.js --env production"
   },
   "dependencies": {
     "axios": "^0.23.0",
@@ -43,6 +42,7 @@
     "webpack-dev-server": "^4.2.1",
     "webpack-hot-middleware": "^2.25.1",
     "webpack-hot-server-middleware": "^0.6.1",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "webpack-node-externals": "^3.0.0"
   }
 }
