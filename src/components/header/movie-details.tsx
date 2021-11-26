@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Movie } from '../../movie';
 import { LogoLink } from '../../shared';
-import searchIcon from '../../assets/images/search.svg';
+import searchIcon from '../../assets/search.svg';
 import './movie-details.scss';
 import { useSearchParams } from 'react-router-dom';
 
