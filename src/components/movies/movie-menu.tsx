@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import moreIcon from '../../assets/images/more.svg';
+import moreIcon from '../../assets/more.svg';
 
 interface Props {
     onEdit: () => void;

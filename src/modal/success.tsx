@@ -1,5 +1,5 @@
 import React from 'react';
-import success from '../assets/images/ok.svg';
+import success from '../assets/ok.svg';
 
 export function SuccessModal() {
     return (
