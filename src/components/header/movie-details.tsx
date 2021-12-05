@@ -7,10 +7,9 @@ import { useSearchParams } from 'react-router-dom';
 
 interface Props {
     movie: Movie;
-    goToSearch: () => void;
 }
 
-export function MovieDetails({ movie, goToSearch }: Props) {
+export function MovieDetails({ movie }: Props) {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const { title, genres, release_date, poster_path, vote_average, runtime, overview } = movie;

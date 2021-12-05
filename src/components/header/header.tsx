@@ -17,7 +17,7 @@ export function Header({ details, toggleDetails, searchQuery }: Props) {
   if (details) {
     return (
       <header>
-        <MovieDetails movie={details} goToSearch={toggleDetails} />
+        <MovieDetails movie={details} />
       </header>
     );
   }

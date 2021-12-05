@@ -1,18 +1,25 @@
 import _ from 'lodash';
-import React, { useContext } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import { Genres } from '../../constants';
-import { FilterContext } from '../../pages/search-page';
+import { FilterContext } from '../../pages/Search';
 
-export function GenreToggle() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const {changeParams} = useContext(FilterContext);
+import './genre-toggle.scss';
 
-  const selected = searchParams.get('genre') || 'all';
+interface Props {
+  genre: string
+}
+
+export function GenreToggle({ genre }: Props) {
+  const [selected, setSelected] = useState('all');
+  const { changeParams } = useContext(FilterContext);
+
+  useEffect(() => {
+    setSelected(genre);
+  }, [genre]);
 
   const handleSelect = (genre: string) => {
-    changeParams({genre});
-  }
+    changeParams({ genre });
+  };
 
   return (
     <ul className="genre-list">

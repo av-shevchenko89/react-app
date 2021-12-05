@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Multiselect } from 'multiselect-react-dropdown';
 import { Filter } from '../../movie';
-import { useSearchParams } from 'react-router-dom';
-import { lte } from 'lodash';
-import { FilterContext } from '../../pages/search-page';
+import { FilterContext } from '../../pages/Search';
+
+import './sorter.scss';
 
 interface SortOption extends Filter {
   label: string;
@@ -15,16 +15,18 @@ const options: SortOption[] = [
   { label: 'Rating', sortBy: 'vote_average', sortOrder: 'desc' },
 ];
 
-export function Sorter() {
-  const [searchParams, setSearchParams] = useSearchParams();
+interface Props {
+  sortBy: string;
+}
+
+export function Sorter({sortBy}: Props) {
   const [selected, setSelected] = useState([options[1]]);
   const {changeParams} = useContext(FilterContext);
 
   useEffect(() => {
-    const sortBy = searchParams.get('sortBy') || 'release_date';
     const selected = options.filter((o) => o.sortBy === sortBy);
     setSelected(selected);
-  }, []);
+  }, [sortBy]);
 
   const onChange = (option: SortOption[]) => {
     const { label, ...data } = option[0];

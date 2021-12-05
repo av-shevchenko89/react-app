@@ -1,0 +1,21 @@
+.genre-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+  
+    li {
+      cursor: pointer;
+      margin-right: 30px;
+      position: relative;
+  
+      &.selected::after {
+        content: '';
+        display: block;
+        height: 4px;
+        background: #F65261;
+        position: relative;
+        top: 23px;
+      }
+    }
+  }
+  

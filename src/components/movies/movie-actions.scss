@@ -1,0 +1,12 @@
+@import "src/styles/colors";
+
+.actions {
+  padding: 20px 0;
+  border-bottom: 2px solid $dark_grey;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: $white;
+}

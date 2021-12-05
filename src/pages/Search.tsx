@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { ErrorBoundary, Header, Movies } from '../components';
-import { Footer } from '../containers';
-import { LogoLink } from '../shared';
-import { useMovieDetails, useMovies } from '../hooks';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import _ from 'lodash';
+import { ErrorBoundary, Header } from '../components';
+import { Footer, Movies } from '../containers';
+import { LogoLink } from '../shared';
+import { useMovieDetails, useMovies } from '../hooks';
 import { MoviesFilter } from '../movie';
 
 export const HeaderContext = React.createContext(null);

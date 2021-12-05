@@ -1,6 +1,6 @@
 import React from 'react';
-import { SearchPage } from './pages/search-page';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { SearchPage } from './pages/Search';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout, NotFound } from './components';
 import { ModalProvider } from './modal';
 
