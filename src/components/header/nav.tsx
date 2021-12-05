@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Btn, LogoLink } from '../../shared';
-import { HeaderContext } from '../../pages/search-page';
+import { HeaderContext } from '../../pages/Search';
 
 export function Nav() {
     const {handleCreate} = useContext(HeaderContext);
@@ -8,7 +8,7 @@ export function Nav() {
     return (
         <nav>
             <LogoLink />
-            <Btn label="+ ADD MOVIE" onClick={handleCreate} />
+            <Btn label="+ ADD MOVIE" type="grey" onClick={handleCreate} />
         </nav>
     )
 }

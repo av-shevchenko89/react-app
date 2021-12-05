@@ -19,11 +19,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  button {
-    background: $light_grey;
-    color: $red;
-  }
 }
 
 .search {
@@ -41,8 +36,6 @@ nav {
   }
 
   .btn {
-    color: $white;
-    background: $red;
     padding: 1vh 2vw;
   }
 }

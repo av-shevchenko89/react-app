@@ -12,7 +12,7 @@ export function DeleteModal({ id, onDelete }: Props) {
         <div className="delete">
             <h1>Delete movie</h1>
             <p>Are you sure you want to delete this movie?</p>
-            <Btn label="Confirm" onClick={() => onDelete(id)} />
+            <Btn label="Confirm" type="solid" onClick={() => onDelete(id)} />
         </div>
     )
 }

@@ -1,25 +1,26 @@
 import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
-import { Genres } from '../../constants';
-import { FilterContext } from '../../pages/Search';
+import React, { useEffect, useState } from 'react';
 
-import './genre-toggle.scss';
+import './genre-toggle.css';
+
+const Genres = [
+  { value: 'all', label: 'All' },
+  { value: 'Drama', label: 'Drama' },
+  { value: 'Comedy', label: 'Comedy' },
+  { value: 'Action', label: 'Action' },
+  { value: 'Horror', label: 'Horror' },
+];
 
 interface Props {
-  genre: string
+  genre: 'all' | 'Drama' | 'Comedy' | 'Action' | 'Horror';
 }
 
 export function GenreToggle({ genre }: Props) {
   const [selected, setSelected] = useState('all');
-  const { changeParams } = useContext(FilterContext);
 
   useEffect(() => {
     setSelected(genre);
   }, [genre]);
-
-  const handleSelect = (genre: string) => {
-    changeParams({ genre });
-  };
 
   return (
     <ul className="genre-list">
@@ -27,7 +28,7 @@ export function GenreToggle({ genre }: Props) {
         <li
           key={i}
           className={genre.value.toLowerCase() === selected.toLowerCase() ? 'selected' : ''}
-          onClick={() => handleSelect(genre.value)}
+          onClick={() => setSelected(genre.value)}
         >
           {genre.label}
         </li>

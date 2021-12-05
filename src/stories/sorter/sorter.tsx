@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Multiselect } from 'multiselect-react-dropdown';
-import { Filter } from '../../movie';
-import { FilterContext } from '../../pages/Search';
 
-import './sorter.scss';
+import './sorter.css';
 
-interface SortOption extends Filter {
+interface SortOption {
+  sortBy: string;
+  sortOrder: 'asc' | 'desc';
   label: string;
 }
 
@@ -16,12 +16,11 @@ const options: SortOption[] = [
 ];
 
 interface Props {
-  sortBy: string;
+  sortBy: 'title' | 'release_date' | 'vote_average';
 }
 
 export function Sorter({sortBy}: Props) {
   const [selected, setSelected] = useState([options[1]]);
-  const {changeParams} = useContext(FilterContext);
 
   useEffect(() => {
     const selected = options.filter((o) => o.sortBy === sortBy);
@@ -29,10 +28,9 @@ export function Sorter({sortBy}: Props) {
   }, [sortBy]);
 
   const onChange = (option: SortOption[]) => {
-    const { label, ...data } = option[0];
-    const { sortBy, sortOrder } = data;
+    const { label } = option[0];
 
-    changeParams({ sortBy, sortOrder });
+    setSelected([option[0]])
   };
 
   return (

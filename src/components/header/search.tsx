@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { HeaderContext } from '../../pages/search-page';
+import { HeaderContext } from '../../pages/Search';
 import { Btn } from '../../shared';
 
 export function Search({ searchQuery }: { searchQuery: string }) {
@@ -19,7 +19,7 @@ export function Search({ searchQuery }: { searchQuery: string }) {
         value={value}
         onChange={(e) => setSearchVal(e.target.value)}
       />
-      <Btn label="Search" onClick={() => handleSearch(value)} />
+      <Btn label="Search" type="solid" onClick={() => handleSearch(value)} />
     </div>
   );
 }

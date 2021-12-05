@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import './btn.scss';
+import './btn.css';
 
 interface Props {
   label: string;
-  type?: string;
+  type?: 'solid' | 'transparent' | 'grey';
   onClick?: () => void;
 }
 
