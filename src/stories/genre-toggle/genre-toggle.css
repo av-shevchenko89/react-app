@@ -1,0 +1,33 @@
+* {
+  font-family: Montserrat, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.genre-list {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  list-style: none;
+  line-height: 20px;
+  padding: 10px 0 20px;
+  border-bottom: 2px solid #424242;
+}
+
+li {
+  cursor: pointer;
+  margin-right: 30px;
+  position: relative;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.selected::after {
+  content: '';
+  display: block;
+  height: 4px;
+  background: #f65261;
+  position: relative;
+  top: 23px;
+}
